@@ -13,12 +13,22 @@ let heartsLeft = 6;
 let heartText1
 let heartText2
 let heartText3
+let skinSelected = 0
+let imgSkin1
+let imgSkin2
+let imgSkin3
+let imgSkinArray
 
 function preload(){
   imgHeart = loadImage('heart.png')
+  imgBG = loadImage('bgImage.jpg')
+  imgSkin1 = loadImage('skin1.png')
+  imgSkin2 = loadImage('skin2.png')
+  imgSkin3 = loadImage('skin3.png')
 }
 
 function setup() {
+  imgSkinArray = [imgSkin1,imgSkin2,imgSkin3]
   frameRate(60)
   let cnv = createCanvas(windowWidth,windowHeight)
     player = {
@@ -28,9 +38,17 @@ function setup() {
     size:50
   }
   background("black")
-  startText = createElement("h1","Clappy Bird")
+  startText = createElement("h1","- Clappy Bird -")
   startText.style("color","white")
   startText.center()
+  selectText = createElement("h1","Arrow keys to select skin and space button to start")
+  selectText.style("color","white")
+  selectText.position(0,height/2)
+  selectText.center("horizontal")
+  skinText1 = createElement("h1","Skin selected: Controller")
+  skinText1.style("color","white")
+  skinText1.position(0,height/2+50)
+  skinText1.center("horizontal")
 }
 
 function createWall(){
@@ -50,7 +68,7 @@ function createWall(){
 }
 
 function keyPressed(){
-  if(key==" "&&isStarted){
+  if(key==" "&&isStarted == true){
     if(player.velocity<-5){
       player.velocity = constrain(player.velocity-jumpForce,-maxVelocity,maxVelocity)
     }
@@ -58,36 +76,67 @@ function keyPressed(){
       player.velocity = -initialJumpForce
     }
   }
-}
-
-function draw() {
-
-  if(isDead == 1){
-    isStarted = false
-    background("black")
-    deadText = createElement("h1","Click to restart!")
-    deadText.style("color","white")
-    deadText.center()
-    isDead = 2
-  }
-
-  if(mouseIsPressed){
-    if(isDead == 0){
-      isStarted = true
-      startText.hide()
+  else if(keyCode === LEFT_ARROW && skinSelected > 0 && isStarted == false){
+    console.log("pressedLeft")
+    skinSelected--
+    console.log(skinSelected)
+    if(skinSelected == 0){
+      skinText1 = createElement("h1","Skin selected: Controller")
+      skinText1.style("color","white")
+      skinText1.position(0,height/2+50)
+      skinText1.center("horizontal")
+      skinText2.hide()
     }
     else{
-      window.location.reload()
+      skinText2 = createElement("h1","Skin selected: Discord")
+      skinText2.style("color","white")
+      skinText2.position(0,height/2+50)
+      skinText2.center("horizontal")
+      skinText3.hide()
     }
   }
+  else if(keyCode === RIGHT_ARROW && skinSelected < 2 && isStarted == false){
+    console.log("pressedRight")
+    skinSelected++
+    console.log(skinSelected)
+    if(skinSelected == 2){
+      skinText3 = createElement("h1","Skin selected: Pac-Man")
+      skinText3.style("color","white")
+      skinText3.position(0,height/2+50)
+      skinText3.center("horizontal")
+      skinText2.hide()
+    }
+    else{
+      skinText2 = createElement("h1","Skin selected: Discord")
+      skinText2.style("color","white")
+      skinText2.position(0,height/2+50)
+      skinText2.center("horizontal")
+      skinText1.hide()
+    }
+  }
+  else if(isDead == 0 && key==" "){
+    isStarted = true
+    startText.hide()
+    selectText.hide()
+    switch(skinSelected){
+      case 0:
+        skinText1.hide()
+        break;
 
-  if(isStarted){
-    background(220);
-    player.velocity = constrain(player.velocity + gravity,-maxVelocity,maxVelocity)
-    player.y = player.y + player.velocity
-    
-    if(player.y > windowHeight || player.y < 0){
-      isDead = 1;
+      case 1:
+        skinText2.hide()
+        break;
+
+      case 2:
+        skinText3.hide()
+        break;
+      
+    }
+  }
+}
+
+function killPlayer(){
+  isDead = 1;
       switch(heartsLeft){
         case 6&&5:
           heartText3.hide();
@@ -97,15 +146,42 @@ function draw() {
           heartText2.hide();
           break;
         
-        case 2&&1:
+        case 2&&1&&0:
           heartText1.hide();
           break;
       }
+}
+
+function draw() {
+
+
+  if(isDead == 1){
+    isStarted = false
+    background("black")
+    deadText = createElement("h1","Click to restart!")
+    deadText.style("color","white")
+    deadText.center()
+    scoreText = createElement("h1","Score: "+walls.length)
+    scoreText.style("color","white")
+    scoreText.position(0,height/2)
+    scoreText.center("horizontal")
+    isDead = 2
+  }
+
+  if(mouseIsPressed&&isDead==2){
+      window.location.reload()
+  }
+
+  if(isStarted && isDead == 0){
+    image(imgBG,0,0,windowWidth,windowHeight)
+    player.velocity = constrain(player.velocity + gravity,-maxVelocity,maxVelocity)
+    player.y = player.y + player.velocity
+    
+    if(player.y > windowHeight || player.y < 0){
+      killPlayer()
     }
 
-    fill("blue")
-    ellipse(player.x, player.y, player.size)
-
+    image(imgSkinArray[skinSelected],player.x-player.size/2,player.y-player.size/2,player.size,player.size)
     
     if(frameCount%90==0 && isStarted){
       createWall()
@@ -114,7 +190,7 @@ function draw() {
       walls[i].topX = walls[i].topX -wallSpeed
       walls[i].bottomX = walls[i].bottomX -wallSpeed
       if(walls[i].isHit == false){
-        fill("green")
+        fill("orange")
       }
       else{
         fill("red")
@@ -127,7 +203,7 @@ function draw() {
         console.log("hit")
         walls[i].isHit = true
         if(heartsLeft == 0){
-          isDead = 1
+          killPlayer()
         }
       }
     }
