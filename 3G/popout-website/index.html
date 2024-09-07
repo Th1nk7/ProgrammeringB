@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-out</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/addons/p5.sound.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+</head>
+<body>
+    <div class="page">
+        <h1>Welcome!</h1>
+        <div class="notePages">
+            <div id="closeWrapper">
+                <div id="closeBtn"></div>
+                <img src="./images/blackX.png">
+            </div>
+            <div id="notePage1">
+                <h1>Lorum1 ipsum1 dolor1 sit1 amet.1</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a fringilla purus. Duis egestas mi quis pellentesque facilisis. Sed sodales molestie consectetur. Integer accumsan fermentum pellentesque. Donec mollis eget magna eu sodales. Mauris ullamcorper orci pulvinar neque tristique venenatis. Sed consequat felis eget massa tristique, ac ullamcorper sapien sodales. Donec fringilla ligula eros, a molestie mi dictum ac. Vivamus semper in tellus ac tristique. Sed vitae pharetra tortor. Suspendisse potenti. Nulla facilisi. Nam semper, dui at faucibus pellentesque, sem leo hendrerit diam, sed tincidunt turpis est in lorem.
+                    
+                    Phasellus vestibulum vulputate neque in porttitor. Maecenas malesuada pharetra nibh, at volutpat mi efficitur ut. Nunc commodo sapien sit amet dictum sagittis. Cras iaculis interdum mi vitae ultrices. Cras volutpat consequat lectus. Morbi in ipsum sed justo interdum hendrerit. Nam feugiat erat diam, in imperdiet urna blandit eget. Nullam eros massa, viverra quis luctus eu, malesuada sit amet elit. Sed molestie auctor ex, sed pretium nisi pretium eget. Fusce eu elementum risus.
+                    
+                    Vestibulum venenatis dictum dui commodo varius. Maecenas tristique metus ligula, in cursus enim luctus ut. Donec pharetra consequat augue. Suspendisse non placerat ex. Curabitur vel lorem vitae mauris viverra tristique id ut nisi. Pellentesque facilisis quis quam non interdum. Nam at lorem vel tortor commodo varius.
+                    
+                    Donec placerat lorem tortor, non lacinia nunc placerat ac. Proin vel lobortis nisl. Aliquam molestie mi congue consequat dictum. Vestibulum tempor massa a risus tempor faucibus. Cras volutpat mauris lacus, sit amet venenatis libero maximus nec. Morbi cursus egestas massa viverra lacinia. Nulla interdum efficitur neque sed varius. Curabitur laoreet lectus felis. In et sagittis nisi. Maecenas ultrices lacus ac ligula dictum, at condimentum ipsum pulvinar. Vestibulum dui enim, gravida vel eros vel, semper tincidunt nisl. Vestibulum tristique vitae libero ut commodo. Nunc non nunc malesuada, molestie ipsum ac, vehicula neque. Cras luctus elit et nibh ullamcorper, nec consectetur tellus pulvinar. Proin eu rhoncus nulla. Aenean non nibh pulvinar, euismod diam ac, consequat erat. 
+                </p>
+                <video id="vid1" class="vidOnNote" disablePictureInPicture preload="none">
+                    <source src="./mp4/chipSpin.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="notePage2">
+                <h1>Lorum2 ipsum2 dolor2 sit2 amet.2</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a fringilla purus. Duis egestas mi quis pellentesque facilisis. Sed sodales molestie consectetur. Integer accumsan fermentum pellentesque. Donec mollis eget magna eu sodales. Mauris ullamcorper orci pulvinar neque tristique venenatis. Sed consequat felis eget massa tristique, ac ullamcorper sapien sodales. Donec fringilla ligula eros, a molestie mi dictum ac. Vivamus semper in tellus ac tristique. Sed vitae pharetra tortor. Suspendisse potenti. Nulla facilisi. Nam semper, dui at faucibus pellentesque, sem leo hendrerit diam, sed tincidunt turpis est in lorem.
+                    
+                    Phasellus vestibulum vulputate neque in porttitor. Maecenas malesuada pharetra nibh, at volutpat mi efficitur ut. Nunc commodo sapien sit amet dictum sagittis. Cras iaculis interdum mi vitae ultrices. Cras volutpat consequat lectus. Morbi in ipsum sed justo interdum hendrerit. Nam feugiat erat diam, in imperdiet urna blandit eget. Nullam eros massa, viverra quis luctus eu, malesuada sit amet elit. Sed molestie auctor ex, sed pretium nisi pretium eget. Fusce eu elementum risus.
+                    
+                    Vestibulum venenatis dictum dui commodo varius. Maecenas tristique metus ligula, in cursus enim luctus ut. Donec pharetra consequat augue. Suspendisse non placerat ex. Curabitur vel lorem vitae mauris viverra tristique id ut nisi. Pellentesque facilisis quis quam non interdum. Nam at lorem vel tortor commodo varius.
+                    
+                    Donec placerat lorem tortor, non lacinia nunc placerat ac. Proin vel lobortis nisl. Aliquam molestie mi congue consequat dictum. Vestibulum tempor massa a risus tempor faucibus. Cras volutpat mauris lacus, sit amet venenatis libero maximus nec. Morbi cursus egestas massa viverra lacinia. Nulla interdum efficitur neque sed varius. Curabitur laoreet lectus felis. In et sagittis nisi. Maecenas ultrices lacus ac ligula dictum, at condimentum ipsum pulvinar. Vestibulum dui enim, gravida vel eros vel, semper tincidunt nisl. Vestibulum tristique vitae libero ut commodo. Nunc non nunc malesuada, molestie ipsum ac, vehicula neque. Cras luctus elit et nibh ullamcorper, nec consectetur tellus pulvinar. Proin eu rhoncus nulla. Aenean non nibh pulvinar, euismod diam ac, consequat erat. 
+                </p>
+                <video id="vid2" class="vidOnNote" disablePictureInPicture preload="none">
+                    <source src="./mp4/chipSpin.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="notePage3">
+                <h1>Lorum3 ipsum3 dolor3 sit3 amet.3</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a fringilla purus. Duis egestas mi quis pellentesque facilisis. Sed sodales molestie consectetur. Integer accumsan fermentum pellentesque. Donec mollis eget magna eu sodales. Mauris ullamcorper orci pulvinar neque tristique venenatis. Sed consequat felis eget massa tristique, ac ullamcorper sapien sodales. Donec fringilla ligula eros, a molestie mi dictum ac. Vivamus semper in tellus ac tristique. Sed vitae pharetra tortor. Suspendisse potenti. Nulla facilisi. Nam semper, dui at faucibus pellentesque, sem leo hendrerit diam, sed tincidunt turpis est in lorem.
+                    
+                    Phasellus vestibulum vulputate neque in porttitor. Maecenas malesuada pharetra nibh, at volutpat mi efficitur ut. Nunc commodo sapien sit amet dictum sagittis. Cras iaculis interdum mi vitae ultrices. Cras volutpat consequat lectus. Morbi in ipsum sed justo interdum hendrerit. Nam feugiat erat diam, in imperdiet urna blandit eget. Nullam eros massa, viverra quis luctus eu, malesuada sit amet elit. Sed molestie auctor ex, sed pretium nisi pretium eget. Fusce eu elementum risus.
+                    
+                    Vestibulum venenatis dictum dui commodo varius. Maecenas tristique metus ligula, in cursus enim luctus ut. Donec pharetra consequat augue. Suspendisse non placerat ex. Curabitur vel lorem vitae mauris viverra tristique id ut nisi. Pellentesque facilisis quis quam non interdum. Nam at lorem vel tortor commodo varius.
+                    
+                    Donec placerat lorem tortor, non lacinia nunc placerat ac. Proin vel lobortis nisl. Aliquam molestie mi congue consequat dictum. Vestibulum tempor massa a risus tempor faucibus. Cras volutpat mauris lacus, sit amet venenatis libero maximus nec. Morbi cursus egestas massa viverra lacinia. Nulla interdum efficitur neque sed varius. Curabitur laoreet lectus felis. In et sagittis nisi. Maecenas ultrices lacus ac ligula dictum, at condimentum ipsum pulvinar. Vestibulum dui enim, gravida vel eros vel, semper tincidunt nisl. Vestibulum tristique vitae libero ut commodo. Nunc non nunc malesuada, molestie ipsum ac, vehicula neque. Cras luctus elit et nibh ullamcorper, nec consectetur tellus pulvinar. Proin eu rhoncus nulla. Aenean non nibh pulvinar, euismod diam ac, consequat erat. 
+                </p>
+                <video id="vid3" class="vidOnNote" disablePictureInPicture preload="none">
+                    <source src="./mp4/chipSpin.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="notePage4">
+                <h1>Lorum4 ipsum4 dolor4 sit4 amet.4</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a fringilla purus. Duis egestas mi quis pellentesque facilisis. Sed sodales molestie consectetur. Integer accumsan fermentum pellentesque. Donec mollis eget magna eu sodales. Mauris ullamcorper orci pulvinar neque tristique venenatis. Sed consequat felis eget massa tristique, ac ullamcorper sapien sodales. Donec fringilla ligula eros, a molestie mi dictum ac. Vivamus semper in tellus ac tristique. Sed vitae pharetra tortor. Suspendisse potenti. Nulla facilisi. Nam semper, dui at faucibus pellentesque, sem leo hendrerit diam, sed tincidunt turpis est in lorem.
+                    
+                    Phasellus vestibulum vulputate neque in porttitor. Maecenas malesuada pharetra nibh, at volutpat mi efficitur ut. Nunc commodo sapien sit amet dictum sagittis. Cras iaculis interdum mi vitae ultrices. Cras volutpat consequat lectus. Morbi in ipsum sed justo interdum hendrerit. Nam feugiat erat diam, in imperdiet urna blandit eget. Nullam eros massa, viverra quis luctus eu, malesuada sit amet elit. Sed molestie auctor ex, sed pretium nisi pretium eget. Fusce eu elementum risus.
+                    
+                    Vestibulum venenatis dictum dui commodo varius. Maecenas tristique metus ligula, in cursus enim luctus ut. Donec pharetra consequat augue. Suspendisse non placerat ex. Curabitur vel lorem vitae mauris viverra tristique id ut nisi. Pellentesque facilisis quis quam non interdum. Nam at lorem vel tortor commodo varius.
+                    
+                    Donec placerat lorem tortor, non lacinia nunc placerat ac. Proin vel lobortis nisl. Aliquam molestie mi congue consequat dictum. Vestibulum tempor massa a risus tempor faucibus. Cras volutpat mauris lacus, sit amet venenatis libero maximus nec. Morbi cursus egestas massa viverra lacinia. Nulla interdum efficitur neque sed varius. Curabitur laoreet lectus felis. In et sagittis nisi. Maecenas ultrices lacus ac ligula dictum, at condimentum ipsum pulvinar. Vestibulum dui enim, gravida vel eros vel, semper tincidunt nisl. Vestibulum tristique vitae libero ut commodo. Nunc non nunc malesuada, molestie ipsum ac, vehicula neque. Cras luctus elit et nibh ullamcorper, nec consectetur tellus pulvinar. Proin eu rhoncus nulla. Aenean non nibh pulvinar, euismod diam ac, consequat erat. 
+                </p>
+                <video id="vid4" class="vidOnNote" disablePictureInPicture preload="none">
+                    <source src="./mp4/chipSpin.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="notePage5">
+                <h1>Lorum5 ipsum5 dolor5 sit5 amet.5</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a fringilla purus. Duis egestas mi quis pellentesque facilisis. Sed sodales molestie consectetur. Integer accumsan fermentum pellentesque. Donec mollis eget magna eu sodales. Mauris ullamcorper orci pulvinar neque tristique venenatis. Sed consequat felis eget massa tristique, ac ullamcorper sapien sodales. Donec fringilla ligula eros, a molestie mi dictum ac. Vivamus semper in tellus ac tristique. Sed vitae pharetra tortor. Suspendisse potenti. Nulla facilisi. Nam semper, dui at faucibus pellentesque, sem leo hendrerit diam, sed tincidunt turpis est in lorem.
+                    
+                    Phasellus vestibulum vulputate neque in porttitor. Maecenas malesuada pharetra nibh, at volutpat mi efficitur ut. Nunc commodo sapien sit amet dictum sagittis. Cras iaculis interdum mi vitae ultrices. Cras volutpat consequat lectus. Morbi in ipsum sed justo interdum hendrerit. Nam feugiat erat diam, in imperdiet urna blandit eget. Nullam eros massa, viverra quis luctus eu, malesuada sit amet elit. Sed molestie auctor ex, sed pretium nisi pretium eget. Fusce eu elementum risus.
+                    
+                    Vestibulum venenatis dictum dui commodo varius. Maecenas tristique metus ligula, in cursus enim luctus ut. Donec pharetra consequat augue. Suspendisse non placerat ex. Curabitur vel lorem vitae mauris viverra tristique id ut nisi. Pellentesque facilisis quis quam non interdum. Nam at lorem vel tortor commodo varius.
+                    
+                    Donec placerat lorem tortor, non lacinia nunc placerat ac. Proin vel lobortis nisl. Aliquam molestie mi congue consequat dictum. Vestibulum tempor massa a risus tempor faucibus. Cras volutpat mauris lacus, sit amet venenatis libero maximus nec. Morbi cursus egestas massa viverra lacinia. Nulla interdum efficitur neque sed varius. Curabitur laoreet lectus felis. In et sagittis nisi. Maecenas ultrices lacus ac ligula dictum, at condimentum ipsum pulvinar. Vestibulum dui enim, gravida vel eros vel, semper tincidunt nisl. Vestibulum tristique vitae libero ut commodo. Nunc non nunc malesuada, molestie ipsum ac, vehicula neque. Cras luctus elit et nibh ullamcorper, nec consectetur tellus pulvinar. Proin eu rhoncus nulla. Aenean non nibh pulvinar, euismod diam ac, consequat erat. 
+                </p>
+                <video id="vid5" class="vidOnNote" disablePictureInPicture preload="none">
+                    <source src="./mp4/chipSpin.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="notePage6">
+                <h1>Lorum6 ipsum6 dolor6 sit6 amet.6</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a fringilla purus. Duis egestas mi quis pellentesque facilisis. Sed sodales molestie consectetur. Integer accumsan fermentum pellentesque. Donec mollis eget magna eu sodales. Mauris ullamcorper orci pulvinar neque tristique venenatis. Sed consequat felis eget massa tristique, ac ullamcorper sapien sodales. Donec fringilla ligula eros, a molestie mi dictum ac. Vivamus semper in tellus ac tristique. Sed vitae pharetra tortor. Suspendisse potenti. Nulla facilisi. Nam semper, dui at faucibus pellentesque, sem leo hendrerit diam, sed tincidunt turpis est in lorem.
+                    
+                    Phasellus vestibulum vulputate neque in porttitor. Maecenas malesuada pharetra nibh, at volutpat mi efficitur ut. Nunc commodo sapien sit amet dictum sagittis. Cras iaculis interdum mi vitae ultrices. Cras volutpat consequat lectus. Morbi in ipsum sed justo interdum hendrerit. Nam feugiat erat diam, in imperdiet urna blandit eget. Nullam eros massa, viverra quis luctus eu, malesuada sit amet elit. Sed molestie auctor ex, sed pretium nisi pretium eget. Fusce eu elementum risus.
+                    
+                    Vestibulum venenatis dictum dui commodo varius. Maecenas tristique metus ligula, in cursus enim luctus ut. Donec pharetra consequat augue. Suspendisse non placerat ex. Curabitur vel lorem vitae mauris viverra tristique id ut nisi. Pellentesque facilisis quis quam non interdum. Nam at lorem vel tortor commodo varius.
+                    
+                    Donec placerat lorem tortor, non lacinia nunc placerat ac. Proin vel lobortis nisl. Aliquam molestie mi congue consequat dictum. Vestibulum tempor massa a risus tempor faucibus. Cras volutpat mauris lacus, sit amet venenatis libero maximus nec. Morbi cursus egestas massa viverra lacinia. Nulla interdum efficitur neque sed varius. Curabitur laoreet lectus felis. In et sagittis nisi. Maecenas ultrices lacus ac ligula dictum, at condimentum ipsum pulvinar. Vestibulum dui enim, gravida vel eros vel, semper tincidunt nisl. Vestibulum tristique vitae libero ut commodo. Nunc non nunc malesuada, molestie ipsum ac, vehicula neque. Cras luctus elit et nibh ullamcorper, nec consectetur tellus pulvinar. Proin eu rhoncus nulla. Aenean non nibh pulvinar, euismod diam ac, consequat erat. 
+                </p>
+                <video id="vid6" class="vidOnNote" disablePictureInPicture preload="none">
+                    <source src="./mp4/chipSpin.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="extendedContainer">
+            <div id="extended1"></div>
+            <div id="extended2"></div>
+            <div id="extended3"></div>
+            <div id="extended4"></div>
+            <div id="extended5"></div>
+            <div id="extended6"></div>
+        </div>
+        <div class="stickyContainer" id="stickyContainer">
+            <div id="sticky1">
+                <h2 class="mainText">
+                    Lorem ipsum 1
+                </h2>
+                <p class="descText">
+                    Klik på mig for at læse mere!<br>
+                    Lorem ipsum hele vejen...
+                </p>
+                <img src="./images/loremSample.png" class="stickyPNG">
+            </div>
+            <div id="sticky2">
+                <h2 class="mainText">
+                    Lorem ipsum 2
+                </h2>
+                <p class="descText">
+                    Klik på mig for at læse mere!<br>
+                    Lorem ipsum hele vejen...
+                </p>
+                <img src="./images/loremSample.png" class="stickyPNG">
+            </div>
+            <div id="sticky3">
+                <h2 class="mainText">
+                    Lorem ipsum 3
+                </h2>
+                <p class="descText">
+                    Klik på mig for at læse mere!<br>
+                    Lorem ipsum hele vejen...
+                </p>
+                <img src="./images/loremSample.png" class="stickyPNG">
+            </div>
+            <div id="sticky4">
+                <h2 class="mainText">
+                    Lorem ipsum 4
+                </h2>
+                <p class="descText">
+                    Klik på mig for at læse mere!<br>
+                    Lorem ipsum hele vejen...
+                </p>
+                <img src="./images/loremSample.png" class="stickyPNG">
+            </div>
+            <div id="sticky5">
+                <h2 class="mainText">
+                    Lorem ipsum 5
+                </h2>
+                <p class="descText">
+                    Klik på mig for at læse mere!<br>
+                    Lorem ipsum hele vejen...
+                </p>
+                <img src="./images/loremSample.png" class="stickyPNG">
+            </div>
+            <div id="sticky6">
+                <h2 class="mainText">
+                    Lorem ipsum 6
+                </h2>
+                <p class="descText">
+                    Klik på mig for at læse mere!<br>
+                    Lorem ipsum hele vejen...
+                </p>
+                <img src="./images/loremSample.png" class="stickyPNG">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
