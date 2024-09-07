@@ -358,3 +358,22 @@ h2 {
     top:0;
     right:9vw;
 }
+
+.pinOnSticky {
+    position: absolute;
+    scale:15%;
+    filter: brightness(200%) !important;
+    top: -30vh;
+    left: -5.5vw;
+    opacity: 1;
+    transition: opacity 0.5s 0.5s ease;
+}
+
+.stickyContainer > div:hover > .pinOnSticky {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.stickyContainer > div.shown > .pinOnSticky {
+    opacity: 0;
+}
