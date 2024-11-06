@@ -1,44 +1,62 @@
+let client
+let block1pos, block2pos, ballX, ballY, state
 
-//variabler til at indsætte i HTML 
-let m5NameDiv, m5StatusDiv
-
-//denne variabel bruges til at håndtere mqtt
-let client 
-
-function setup() {
-  //tag fat i de to HTML elementer vi vil modificere 
-  m5NameDiv = select('#m5_1 header')
-  m5StatusDiv = select('#m5_1 .status')
-
-  //vi kan bruge mqtt.connect fordi vi har inkluderet mqtt.js i HTML filen
+function setup(){
+  state = "setup"
+  createCanvas(1440, 1080)
   client = mqtt.connect('wss://mqtt.nextservices.dk')
 
-  //on er en asynkron EVENT, som kaldes når vi får en besked fra mqtt serveren 
   client.on('connect', function(svar){
-    console.log(svar, 'serveren er klar til mqtt kommunikation')
+  console.log(svar, 'serveren er klar til mqtt kommunikation')
   })
 
-  //nu vil vi gerne subscribe på et emne
-  client.subscribe('programmering') 
+  
+  client.subscribe('electric_pong')
 
-  //og så skal vi sætte den LISTENER op som skal modtage input fra MQTT
   client.on('message', function(emne, besked){
-    //emnet kommer som en string 
-    console.log(emne)
-    //beskeden skal vi lige parse før vi kan læse den
-    console.log(besked.toString())
-    //det vi får fra m5'eren er i det her eksempel JSON format 
-    let json = JSON.parse(besked.toString())
-    //nu kan jeg bruge data fra JSON objektet 
-    console.log(json.name, 'her er navnet fra JSON objektet')
-    //SÅ kan vi opdatere HTML dokumentet 
-    m5NameDiv.html(json.name)
-    m5StatusDiv.html(json.status)
-    //HVIS status er true, skal vi give klassen "true"
-    if(json.status){
-      m5StatusDiv.addClass("true")
-    }else{
-      m5StatusDiv.removeClass("true")
-    }
+      console.log(emne)
+      console.log(besked.toString())
+      try {
+        const json = JSON.parse(besked)
+        if(json.blockNum == "3"){
+          ballX = int(json.ballX)
+          ballY = int(json.ballY)
+        }
+        if(json.blockNum == "1"){
+          block1pos = int(json.block1pos)
+        }
+        if(json.blockNum == "2"){
+          block2pos = int(json.block2pos)
+        }
+      } catch (e) {
+        console.log(e)
+        if(besked.toString() == "game"){
+          state = "game"
+        }
+        else if(besked.toString() == "setup"){
+          state = "setup"
+        }
+        else if(besked.toString() == "countdown"){
+          
+        }
+      }
+    
   })
+}
+
+function draw(){
+  background("black")
+  noStroke()
+  fill("white")
+  if(state == "setup"){
+    block1pos = 540
+    block2pos = 540
+    ballX = 720
+    ballY = 540
+  }
+  else if(state == "game"){
+    ellipse(ballX,ballY,20)
+    rect(240,block1pos,30,180)
+    rect(1200,block2pos,30,180) 
+  }
 }

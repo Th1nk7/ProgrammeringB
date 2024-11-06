@@ -1,0 +1,129 @@
+{
+    "mqtt_channels": ["state_pong", "slave2master_pong", "master2display_pong", "shock_pong"],
+    "display": {
+        "setup": [
+            "brightnessZero",
+            "startMQTT"
+        ],
+        "variables": ["ballMaxYSpeed","ballYSpeed","ballXSpeed","ballX", "ballY", "blockLeftX", "blockLeftY", "blockRightX", "blockRightY", "score", "blockWidth", "blockHeight"],
+        "functions": {
+            "tickBall": ["touchCeil","touchFloor","touchBlockLeft","touchBlockRight","touchRightGoal","touchLeftGoal"],
+            "pointLeft": ["awardPointLeft","sendShockRight","sendSetup","goSetup","checkPointLeft"],
+            "pointRight": ["awardPointRight","sendShockLeft","sendSetup","goSetup","checkPointRight"],
+            "checkPointLeft": {
+                "has3PointsLeft": "resetPoints"
+            },
+            "checkPointRight": {
+                "has3PointsRight": "resetPoints"
+            },
+            "touchCeil": {
+                "ballYLessThan0": "invertBallYSpeed"
+            },
+            "touchFloor": {
+                "ballYMoreThanCanvasHeight": "invertBallYSpeed"
+            },
+            "touchBlockLeft": {
+                "ballXLessThanBlockLeftXPlusBlockWidthDividedBy2": {
+                    "ballXMoreThanBlockLeftXMinusBlockWidthDividedBy2": {
+                        "ballYSpeed": "mapBallYMinusBlockLeftYFromMinMinusBallMaxYSpeedTimes2MaxBallMaxYSpeedTimes2",
+                        "ballXSpeed": "invertValue"
+                    }
+                }
+            },
+            "touchBlockRight": {
+                "ballXLessThanBlockRightXPlusBlockWidthDividedBy2": {
+                    "ballXMoreThanBlockRightXMinusBlockWidthDividedBy2": {
+                        "ballYSpeed": "mapBallYMinusBlockRightYFromMinMinusBallMaxYSpeedTimes2MaxBallMaxYSpeedTimes2",
+                        "ballXSpeed": "invertValue"
+                    }
+                }
+            },
+            "touchRightGoal": {
+                "ballXMoreThanCanvasWidth": "pointLeft"
+            },
+            "touchLeftGoal": {
+                "ballXMoreThanCanvasWidth": "pointRight"
+            },
+            "goSetup": {
+                "bothButtonsPressed": "countdown",
+                "notBothButtonsPressed": "resetCountdown",
+                "countdownDone": "sendGame"
+            }
+        },
+        "screenSize": "800, 1192",
+        "canvasSize": "800, 800",
+        "receiveMQTT": {
+            "master2display_pong": {
+                "variablesChanged": ["blockLeftY", "blockRightY"],
+                "executeAndDraw": ["background", "tickBall", "ball", "blocks"]
+            },
+            "state_pong": {
+                "readySIDE": "setReadySIDEtrue",
+                "abortSIDE": "setReadySIDEfalse"
+            }
+        }
+    },
+
+
+    "master_m5": {
+        "variables": [
+            "blockLeftY",
+            "blockRightY"
+        ],
+        "receiveMQTT": {
+            "slave2master_pong": {
+                "updateVariables": [
+                    "blockLeftY",
+                    "blockRightY"
+                ]
+            },
+            "state_pong": {
+                "setup": {
+                    "resetVariables": [
+                        "blockLeftY",
+                        "blockRightY"
+                    ],
+                    "setVariable": {
+                        "state": "setup"
+                    }
+                },
+                "game": [
+                    "sendBlockRightY",
+                    "sendBlockLeftY",
+                    "setStateGame"
+                ]
+            }
+        }
+    },
+
+
+    "slave_m5": {
+        "variables": [
+            "blockSIDEY",
+            "state"
+        ],
+        "functions": {
+            "giveShockSIDE": [
+                "turnOnRelay",
+                "wait800ms",
+                "turnOffRelay"
+            ]
+        },
+        "receiveMQTT": {
+            "state_pong": {
+                "setup": {
+                    "bothButtonsPressed": "sendReadySIDE",
+                    "oneButtonReleased": "sendAbortSIDE"
+                },
+                "game": {
+                    "leftButtonPressed": "increaseBlockSIDEY",
+                    "rightButtonPressed": "decreaseBlockSIDEY",
+                    "execute": "sendBlockSIDEY"
+                }
+            },
+            "shock_pong": {
+                "shockSIDE": "giveShockSIDE"
+            }
+        }
+    }
+}
