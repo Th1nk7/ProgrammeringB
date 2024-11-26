@@ -29,6 +29,29 @@
     place-items: center;
 }
 
+#alarmsDiv {
+    border: 3px dashed rgb(0, 0, 0, 0.7);
+    position:fixed;
+    display: grid;
+    width: 46vw;
+    height: 60vh;
+    margin-right: 2vw;
+    right:0;
+    bottom:3vh;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+}
+
+#clocksText{
+    right:26.5vw;
+    top:29vh !important;
+}
+
+#alarmsText{
+    left:26.5vw;
+    top:29vh !important;
+}
+
 .time{
     font-family:arial;
     font-size:6rem;
@@ -67,16 +90,38 @@ h1{
 #page1 h1{
     position: absolute;
     top:5vh;
+    text-align: center;
+    width:100%;
 }
 
-#colorh1{
-    left:20vw;
+#colortext{
+    right:26.5vw;
 }
 
-#typeh1{
-    right:20vw;
+#typetext{
+    left:26.5vw;
 }
 
 button{
     font-size: large;
+}
+
+.rmBtnDiv{
+    position:absolute;
+}
+
+.rmBtn{
+    position: relative;
+    top:7.5vh;
+    background-color: #ff1111;
+    border-color: black;
+    color:black;
+}
+
+#timePicker {
+    display: none;
+}
+
+#timePicker.show {
+    display: block;
 }
