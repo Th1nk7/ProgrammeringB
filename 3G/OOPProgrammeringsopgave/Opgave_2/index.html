@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alien Invasion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="gridContainer">
+      <div class="header">Alien Invasion</div>
+      <div class="spawner">
+        Spawn:
+        <button class="spawnButton" id="humanSpawnBtn">HUMAN</button>
+        <button class="spawnButton" id="alienSpawnBtn">ALIEN</button>
+      </div>
+      <div class="upperRight">
+        <h1>Dialogue</h1>
+        <div id="dialogue" class="scrollable"></div>
+      </div>
+      <div class="lowerRight">
+        <h1>Entity list</h1>
+        <div id="entityList" class="scrollable"></div>
+      </div>
+      <div class="left">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <script type="module" src="globals.js"></script>
+    <script>console.log(window.faker.person.fullName());</script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="classes.js"></script>
+    <script src="tools.js"></script>
+    <script src="script.js"></script>
+
+  </body>
+</html>
