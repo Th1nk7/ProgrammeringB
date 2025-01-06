@@ -35,7 +35,10 @@ const alienLetters = ['\u{23C3}','\u{23DA}','\u{260A}','\u{2385}','\u{27D2}','\u
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const map = L.map('map').setView([20, 0], 2)
+
+////////// OLD CODE //////////
+
+/*const map = L.map('map').setView([20, 0], 2)
 const markers = [];
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -43,24 +46,63 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 function addMarker(lat, lng, iconURL, onClickFunction) {
     const icon = L.icon({
         iconUrl: `${iconURL}`,
-        iconSize: [128, 128],
-        iconAnchor: [64,0],
+        iconSize: [32, 32],
+        iconAnchor: [16,0],
     });
-    const marker = L.circleMarker([lat, lng], {
+    const marker = L.marker([lat, lng], {
         icon
     }).addTo(map);
 
     marker.on('click', onClickFunction);
 
     markers.push(marker);
+}*/
+
+////////// OLD CODE //////////
+
+const map = L.map('map').setView([20, 0], 2);
+const markers = [];
+
+// Add the map tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// Function to calculate scaled icon size based on zoom level
+function getScaledIcon(iconURL, zoom) {
+    const baseSize = 64; // Default size of the icon
+    const scaleFactor = zoom / 10; // Scale factor (adjust as needed)
+    const size = baseSize * scaleFactor;
+
+    return L.icon({
+        iconUrl: iconURL,
+        iconSize: [size, size], // Width and height
+        iconAnchor: [size / 2, size / 2], // Center the icon
+    });
 }
+
+// Function to add markers with scalable icons
+function addMarker(lat, lng, iconURL, onClickFunction) {
+    const initialZoom = map.getZoom();
+    const marker = L.marker([lat, lng], {
+        icon: getScaledIcon(iconURL, initialZoom),
+    }).addTo(map);
+
+    // Update the marker icon size when zooming
+    map.on('zoom', () => {
+        const currentZoom = map.getZoom();
+        marker.setIcon(getScaledIcon(iconURL, currentZoom));
+    });
+
+    marker.on('click', onClickFunction);
+    markers.push(marker);
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 async function getRandomHuman() {
     const res = await fetch("https://randomuser.me/api/1.4/?inc=name,location,picture,dob&noinfo")
     const data = await res.json()
-    const latlngData = getCoordinates(`${data.results[0].location.country}`).then(coords => {return faker.address.nearbyGPSCoordinates([coords.lat, coords.lon], 500, true)});
+    const latlngData = await getCoordinates(`${data.results[0].location.country}`).then((coords) => {return generateRandomPoint({"lat": coords.lat, "lng": coords.lon}, 100000)});
     const ret = {
         "name": `${data.results[0].name.first} ${data.results[0].name.last}`,
         "age": data.results[0].dob.age,
@@ -75,7 +117,7 @@ async function getRandomHuman() {
 async function getRandomAlien() {
     const res = await fetch("https://randomuser.me/api/1.4/?inc=name,location&noinfo")
     const data = await res.json()
-    const latlngData = getCoordinates(`${data.results[0].location.country}`).then(coords => {return faker.address.nearbyGPSCoordinates([coords.lat, coords.lon], 500, true)});
+    const latlngData = await getCoordinates(`${data.results[0].location.country}`).then((coords) => {return generateRandomPoint({"lat": coords.lat, "lng": coords.lon}, 100000)});
     const ret = {
         "name": `${data.results[0].name.first} ${shuffle(data.results[0].name.last.split('')).join('')}`,
         "age": Math.ceil(random(-999,1337)),

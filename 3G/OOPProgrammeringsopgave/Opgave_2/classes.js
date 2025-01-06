@@ -6,12 +6,15 @@ class Alien {
   }
 
   introduce(alien = true) {
-    if (alien) {
-      sendDialogue(this.name, this.age, this.country, `Hello from ${this.name}, ${this.age} years old AND I am an ALIEN from ${this.country}`)
+    sendDialogue(this.name, this.age, this.country, `Hello from ${this.name}, ${this.age} years old AND I am an ALIEN living in ${this.country}`)
+  }
+
+  speak(n) {
+    let msg = ""
+    for(let i=0;i<n;i++) {
+      msg += random(alienLetters)
     }
-    else {
-      sendDialogue(this.name, this.age, this.country, `Hello from ${this.name}, ${this.age} years old`)
-    }
+    sendDialogue(this.name, this.age, this.country, msg)
   }
 }
 
@@ -22,8 +25,7 @@ class Human extends Alien{
   }
 
   introduce() {
-    super.introduce(false)
-    sendDialogue(this.name, this.age, this.country, `You can find me in ${this.country}`)
+    sendDialogue(this.name, this.age, this.country, `Hello from ${this.name}, ${this.age} years old. You can find me in ${this.country}`)
   }
 
   brag() {
@@ -31,7 +33,7 @@ class Human extends Alien{
     for(let i=1;i<this.nof;i++) {
       this.nofMSG += `${str(i)}, `
     }
-    this.nofMSG += `${str(i)} many fingers!`
+    this.nofMSG += `${str(this.nof)} many fingers!`
     sendDialogue(this.name, this.age, this.country, this.nofMSG)
   }
 }

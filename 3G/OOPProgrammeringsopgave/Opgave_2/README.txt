@@ -7,5 +7,3 @@ Derudover bruger jeg et kort af jorden, og ud fra hvad jeg kan huske, så skal d
 I stedet for planeter, vil jeg bruge lande/områder (f.eks. Jylland, Sverige el.lign.).
 
 UPDATE: Har fået javascript fra skabelonen af en anden fra klassen.
-
-##### HJEMMESIDEN ER (NÆSTEN) FÆRDIG, OG ARBEJDES STADIG PÅ, HÅBER DET ER OK ######
