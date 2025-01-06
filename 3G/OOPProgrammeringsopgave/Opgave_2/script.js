@@ -34,6 +34,9 @@ function addToEntityList(name, age, country, type) {
 
     div.child(eleName); div.child(eleAge); div.child(eleCountry); div.child(eleType);
     div.parent(entityListContainer)
+
+    const container = document.getElementById('entityList');
+    container.scrollTop = container.scrollHeight;
 }
 
 function setup() {
