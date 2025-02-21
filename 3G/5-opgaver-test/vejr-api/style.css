@@ -1,0 +1,64 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: darkgrey;
+}
+
+#mainDisplay {
+  position: absolute;
+  left:35vw;
+  top: 10vh;
+  width: 30vw;
+  height: 80vh;
+  background-color: lightgrey;
+  text-align: center;
+  color:black;
+  display:grid;
+}
+
+#mainDisplay.day {
+  background-color: aqua;
+  color: black;
+}
+
+#mainDisplay.night {
+  background-color: rgb(4, 16, 43);
+  color: rgb(200, 200, 0);
+}
+
+#searchPlace {
+  text-align: center;
+  margin: 30px;
+  font-size: 2rem;
+  margin-bottom: 0px;
+}
+
+#placeDisplay {
+  font-size: 3rem;
+}
+
+#weatherImg {
+  width:50%;
+  position: relative;
+  top: -7vh;
+  place-self: center;
+}
+
+#searchButton {
+  position: relative;
+  font-size: 2rem;
+  margin-top: 30px;
+  margin-right: 30px;
+}
+
+#infoDisplay {
+  position: relative;
+  top: -12vh;
+  height: 100%;
+  font-size: 1.5rem;
+}
+
+#searchDiv {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+}
