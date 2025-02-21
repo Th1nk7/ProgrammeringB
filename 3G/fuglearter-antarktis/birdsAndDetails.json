@@ -1,0 +1,13 @@
+[
+    { "name": "Wandering albatross", "family": "Albatrosses", "size": 120 },
+    { "name": "Grey-headed albatross", "family": "Albatrosses", "size": 95 },
+    { "name": "Black-browed albatross", "family": "Albatrosses", "size": 100 },
+    { "name": "King penguin", "family": "Penguins", "size": 90 },
+    { "name": "Emperor penguin", "family": "Penguins", "size": 115 },
+    { "name": "Gentoo penguin", "family": "Penguins", "size": 80 },
+    { "name": "Adelie penguin", "family": "Penguins", "size": 70 },
+    { "name": "Antarctic shag", "family": "Cormorants", "size": 85 },
+    { "name": "Imperial shag", "family": "Cormorants", "size": 90 },
+    { "name": "Snow petrel", "family": "Petrels", "size": 60 },
+    { "name": "Cape petrel", "family": "Petrels", "size": 65 }
+]

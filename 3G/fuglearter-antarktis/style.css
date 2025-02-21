@@ -1,0 +1,43 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+#menu {
+  width:100vw;
+  height: 10vh;
+  position: fixed;
+  background-color: rgb(100, 100, 100,0.9);
+  border-bottom: 2px black solid;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#shootBirdBtn {
+  width:45%;
+  height:100%;
+  background-color: lightpink;
+}
+
+#createRandomBtn {
+  width:45%;
+  height:100%;
+  background-color: lightgreen;
+}
+
+#shootBirdBtn:hover {
+  background-color: red;
+}
+
+#createRandomBtn:hover {
+  background-color: green;
+}
+
+button {
+  font-size: 3rem;
+}
